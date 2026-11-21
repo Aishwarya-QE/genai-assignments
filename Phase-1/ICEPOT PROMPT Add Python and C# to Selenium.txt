@@ -1,0 +1,76 @@
+ICEPOT PROMPT: Add Python and C# to Selenium in Ledge-3.0
+==========================================================
+
+I - INSTRUCTION
+Right now my extension writes Selenium test code only in Java.
+(Playwright already works in TypeScript and Python.)
+Make it write Selenium code in 2 more languages: Python and C#.
+Whatever language I pick in the Language dropdown, the extension
+should write the Selenium script in that language.
+After this change, Selenium should work in Java, Python and C#.
+
+C - CONTEXT
+- My project is "Ledge-3.0", a Chrome extension by TestLeaf. It turns
+  manual test cases into automation scripts.
+- The list of languages for each framework is in
+  background/prompts/automationPrompt.js (FRAMEWORKS):
+  "languages" is what the dropdown shows and "supported" is what really
+  works. Languages not in "supported" show "(coming soon)" and can't be
+  picked.
+- [STRICT] Don't change anything for Playwright.
+- [STRICT] Don't change how Selenium Java works today.
+- [STRICT] Keep JavaScript for Selenium as "(coming soon)".
+- The AI instructions for iframes and shadow DOM are written with Java
+  method names (driver.switchTo().frame, getShadowRoot()). Make sure
+  Python and C# get their own method names:
+  - Python: driver.switch_to.frame(...), driver.switch_to.default_content(),
+    element.shadow_root
+  - C#: driver.SwitchTo().Frame(...), driver.SwitchTo().DefaultContent(),
+    element.GetShadowRoot()
+- Update the hint text under the dropdown so it says what works today.
+
+E - EXAMPLE
+The Selenium dropdown should look like this:
+- Java, Python, C#, JavaScript (coming soon)
+
+When no reference script is pasted, each new language should follow
+this style (use these sentences exactly):
+- Python: Selenium 4 with pytest, a `driver` fixture that creates
+  `webdriver.Chrome()` and quits it after the test (yield), one
+  `def test_tc001_<short_name>(driver) -> None:` function per case,
+  `By` locators, `WebDriverWait` + `expected_conditions as EC`
+  (no time.sleep), plain `assert` statements. Use snake_case Python
+  names (find_element, send_keys, switch_to), never Java names.
+- C#: Selenium 4 with NUnit, a `[TestFixture]` class, `ChromeDriver`
+  created in `[SetUp]` and quit/disposed in `[TearDown]`, one `[Test]`
+  method per case, `By` locators, `WebDriverWait` with a lambda
+  condition such as `wait.Until(d => d.FindElement(...))`
+  (no Thread.Sleep), NUnit `Assert.That(...)` assertions. Use C#
+  PascalCase names (FindElement, SendKeys, SwitchTo).
+
+The downloaded file should be named:
+- Java: <ClassName>.java (no change)
+- Python: test_ledge.py
+- C#: <ClassName>.cs (use the class name from the code, or LedgeTest.cs)
+
+When Python or C# is picked, the example in the reference-script box
+should show a short Selenium test in that language.
+
+If I paste a reference script, copy its style and structure, but write
+the code in the language picked in the dropdown.
+
+P - PERSONA
+Act as a careful senior developer who makes small, clean changes and
+doesn't break anything that already works.
+
+O - OUTPUT
+- Make the changes in the project files.
+- Then tell me in simple words which files you changed and what you
+  changed, with links to the exact lines.
+- Confirm that Selenium works in Java, Python and C#, JavaScript still
+  shows "(coming soon)", and Playwright is unchanged.
+- Tell me how to reload the extension and test it, including how to
+  run the Python script (pytest) and the C# script (dotnet test).
+
+T - TONE
+Simple and clear. Short explanation, no jargon.
