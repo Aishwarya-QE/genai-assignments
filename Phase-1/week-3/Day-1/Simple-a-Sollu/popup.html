@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple-ah Sollu</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <div class="title">Simple-ah Sollu 💬</div>
+    <div class="subtitle">Say it simply!</div>
+  </header>
+
+  <main>
+    <p class="how">Select any text → right-click → <b>Simple-ah Sollu 💬</b></p>
+
+    <!-- Default level: radio buttons styled as two cards -->
+    <fieldset>
+      <legend>Default level</legend>
+      <div class="choices">
+        <label class="choice">
+          <input type="radio" name="level" value="student" />
+          <span class="choice-box">
+            <span class="choice-title">🎒 Student</span>
+            <span class="choice-hint">Very simple words, everyday examples</span>
+          </span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="level" value="professional" />
+          <span class="choice-box">
+            <span class="choice-title">💼 Professional</span>
+            <span class="choice-hint">Correct terms, workplace example</span>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- Default language -->
+    <fieldset>
+      <legend>Default language</legend>
+      <div class="choices">
+        <label class="choice">
+          <input type="radio" name="language" value="english" />
+          <span class="choice-box">
+            <span class="choice-title">🇬🇧 English</span>
+            <span class="choice-hint">"An API is a messenger…"</span>
+          </span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="language" value="tanglish" />
+          <span class="choice-box">
+            <span class="choice-title">🌴 Tanglish</span>
+            <span class="choice-hint">"API na oru messenger…"</span>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+
+    <div id="saved" class="saved" role="status"></div>
+
+    <!-- Shows whether the API key + model are set -->
+    <div class="key-row">
+      <span id="keyStatus">Checking settings…</span>
+      <button id="openSettings" type="button">⚙️ Settings</button>
+    </div>
+
+    <p class="tip">💡 You can also switch level and language on the card itself.</p>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
